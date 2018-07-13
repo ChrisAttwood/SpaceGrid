@@ -6,39 +6,51 @@ public class ClickPlane : MonoBehaviour {
 
 
     public static ClickPlane instance;
-    LayerMask mask;
+    int mask;
 
     void Awake()
     {
+        mask = LayerMask.NameToLayer("ClickPlane");
         instance = this;
     }
 
 
     void Start () {
-        mask = LayerMask.NameToLayer("ClickPlane");
-
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        CheckClick();
+       
 
     }
 
-    //public Vector2Int GetGridPosition()
-    //{
 
-    //}
-
-
-    void CheckClick()
+    public Vector2Int? GetGridPosition()
     {
+        var pos = GetPosition();
+        if (pos == null) return null;
+
+        return new Vector2Int(Mathf.RoundToInt(pos.Value.x), Mathf.RoundToInt(pos.Value.y));
+    }
+
+    public Vector3? GetGridWorldPosition()
+    {
+        var pos = GetGridPosition();
+        if (pos == null) return null;
+
+        return new Vector3(pos.Value.x,0f,pos.Value.y);
+    }
+
+    public Vector2? GetPosition()
+    {
+        
+       
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
+      
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-           
+            var pos = hit.point;
+            return new Vector2(pos.x, pos.z);
         }
-        
+
+        return null;
      }
 }
