@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15b3f8bb7263c3f42902965aab2b3bfb, type: 3}
   m_Name: MetalFloor
   m_EditorClassIdentifier: 
-  Structure: {fileID: 1519631669100216, guid: 13dc9f9693708d444a96485671966ded, type: 2}
+  Structure: {fileID: 1172586250906570, guid: 90a5d0cdcf32de44e9a220f2721518f1, type: 2}
   BuildType: 3
