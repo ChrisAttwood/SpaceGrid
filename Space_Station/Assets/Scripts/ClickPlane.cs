@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class ClickPlane : MonoBehaviour {
 
+
+    public static ClickPlane instance;
     LayerMask mask;
 
-    // Use this for initialization
+    void Awake()
+    {
+        instance = this;
+    }
+
+
     void Start () {
         mask = LayerMask.NameToLayer("ClickPlane");
 
@@ -18,17 +25,20 @@ public class ClickPlane : MonoBehaviour {
 
     }
 
+    //public Vector2Int GetGridPosition()
+    //{
+
+    //}
+
 
     void CheckClick()
     {
         RaycastHit hit;
-       //Ray ray = Camera..ScreenPointToRay(Input.mousePosition);
-
-
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, mask))
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
+           
         }
-    }
+        
+     }
 }
