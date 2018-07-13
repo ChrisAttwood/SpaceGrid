@@ -10,15 +10,10 @@ public class ClickPlane : MonoBehaviour {
 
     void Awake()
     {
-        mask = LayerMask.NameToLayer("ClickPlane");
+        mask = LayerMask.NameToLayer("ClickPlane");//TODO:Get this working
         instance = this;
     }
 
-
-    void Start () {
-       
-
-    }
 
 
     public Vector2Int? GetGridPosition()
