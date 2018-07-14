@@ -67,7 +67,7 @@ public class Builder : MonoBehaviour {
         {
             if (CurrentBluePrint != null)
             {
-                if (CurrentBluePrint.Foundation)
+                if (CurrentBluePrint.IsFoundation)
                 {
                     BuildFoundation();
                 }
@@ -75,9 +75,7 @@ public class Builder : MonoBehaviour {
                 {
                     Build();
                 }
-               
-               
-               
+
                 IsDrawing = false;
                 ClearBluePrints();
 
@@ -148,7 +146,6 @@ public class Builder : MonoBehaviour {
             {
                 var block = Instantiate(CurrentBluePrint.Structure);
                 block.transform.position = new Vector3(spot.x, CurrentBluePrint.Level, spot.y);
-                
                 block.transform.SetParent(StationStructure.instance.transform);
             }
 
@@ -171,9 +168,30 @@ public class Builder : MonoBehaviour {
             case BuildType.Box:
                 Shape = ShapeMaths.Box(StartPos.Value, ClickPlane.instance.GetGridPosition().Value);
                 break;
+            case BuildType.Footprint:
+                Shape = FromFootPrint();
+                break;
         }
 
         return Shape;
+    }
+
+    List<Vector2Int> FromFootPrint()
+    {
+        var pos = ClickPlane.instance.GetGridPosition().Value;
+        List<Vector2Int> shape = new List<Vector2Int>();
+        for (int x = -2; x <= 2; x++)
+        {
+            for (int y = -2; y <= 2; y++)
+            {
+                if (CurrentBluePrint.FootPrintData.rows[x+2].row[y+2])
+                {
+                    shape.Add(new Vector2Int(pos.x + x, pos.y + y));
+                }
+            }
+        }
+
+        return shape;
     }
 
 }

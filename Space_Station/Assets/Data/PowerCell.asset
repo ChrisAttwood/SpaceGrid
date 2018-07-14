@@ -12,5 +12,13 @@ MonoBehaviour:
   m_Name: PowerCell
   m_EditorClassIdentifier: 
   Structure: {fileID: 1818056121789324, guid: c1c5fdb9234d73d499179107d12d077b, type: 2}
-  BuildType: 0
-  Foundation: 0
+  BuildType: 1
+  Level: 1
+  IsFoundation: 0
+  FootPrintData:
+    rows:
+    - row: 0000010000
+    - row: 0000010000
+    - row: 0101010000
+    - row: 0000000000
+    - row: 0000000000

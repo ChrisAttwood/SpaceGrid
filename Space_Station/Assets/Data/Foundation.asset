@@ -14,4 +14,11 @@ MonoBehaviour:
   Structure: {fileID: 1109646688160740, guid: 7a9df03762cd1754e8fd6590e9aa3a6e, type: 2}
   BuildType: 3
   Level: 0
-  Foundation: 1
+  IsFoundation: 1
+  FootPrintData:
+    rows:
+    - row: 0000000000
+    - row: 0000000000
+    - row: 0000000000
+    - row: 0000000000
+    - row: 0000000000

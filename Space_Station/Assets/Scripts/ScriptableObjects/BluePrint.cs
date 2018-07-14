@@ -10,7 +10,10 @@ public class BluePrint : ScriptableObject {
     public BuildType BuildType;
 
     public int Level = 1;
-    public bool Foundation;
+    public bool IsFoundation;
+
+    [Header("Footprint")]
+    public FootPrintData FootPrintData;
    
 
 }
