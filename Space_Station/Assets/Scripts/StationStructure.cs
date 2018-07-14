@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//One per scene. Using static instance for easy access.
 public class StationStructure : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public static StationStructure instance;
+
+    public Dictionary<Vector2Int, bool> Spaces;
+
+    private void Awake()
+    {
+        instance = this;
+        Spaces = new Dictionary<Vector2Int, bool>();
+    }
+
+
 }

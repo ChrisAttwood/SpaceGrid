@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//One per scene. Using static instance for easy access.
 public class Builder : MonoBehaviour {
 
     public static Builder instance;
