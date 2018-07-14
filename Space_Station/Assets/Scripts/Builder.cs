@@ -8,8 +8,10 @@ public class Builder : MonoBehaviour {
 
     public static Builder instance;
    
-    public GameObject BluePrintTile;
-    GameObject[] pbs;
+    public GameObject GoodBluePrint;
+    public GameObject BadBluePrint;
+    GameObject[] good;
+    GameObject[] bad;
     int bpSize = 1000;
     BluePrint CurrentBluePrint;
 
@@ -29,12 +31,17 @@ public class Builder : MonoBehaviour {
     void CreateAndHideBluePrintBlocks()
     {
         GameObject holder = new GameObject("bluePrintDesigner");
-        pbs = new GameObject[bpSize];
+        good = new GameObject[bpSize];
+        bad = new GameObject[bpSize];
         for (int i = 0; i < bpSize; i++)
         {
-            pbs[i] = Instantiate(BluePrintTile);
-            pbs[i].transform.parent = holder.transform;
-            pbs[i].gameObject.SetActive(false);
+            good[i] = Instantiate(GoodBluePrint);
+            good[i].transform.parent = holder.transform;
+            good[i].gameObject.SetActive(false);
+
+            bad[i] = Instantiate(BadBluePrint);
+            bad[i].transform.parent = holder.transform;
+            bad[i].gameObject.SetActive(false);
         }
     }
 
@@ -102,12 +109,26 @@ public class Builder : MonoBehaviour {
         ClearBluePrints();
         List<Vector2Int> Shape = GetShape();
 
-        for (int j = 0; j < Shape.Count; j++)
+        if(!CurrentBluePrint.IsFoundation && !CanBuildHere(Shape))
         {
-            pbs[j].gameObject.SetActive(true);
-            pbs[j].transform.position = new Vector3(Shape[j].x, CurrentBluePrint.Level, Shape[j].y);
-           
+            for (int j = 0; j < Shape.Count; j++)
+            {
+                bad[j].gameObject.SetActive(true);
+                bad[j].transform.position = new Vector3(Shape[j].x, CurrentBluePrint.Level, Shape[j].y);
+
+            }
         }
+        else
+        {
+            for (int j = 0; j < Shape.Count; j++)
+            {
+                good[j].gameObject.SetActive(true);
+                good[j].transform.position = new Vector3(Shape[j].x, CurrentBluePrint.Level, Shape[j].y);
+
+            }
+        }
+
+       
 
     }
 
@@ -115,7 +136,8 @@ public class Builder : MonoBehaviour {
     {
         for (int i = 0; i < bpSize; i++)
         {
-            pbs[i].gameObject.SetActive(false);
+            good[i].gameObject.SetActive(false);
+            bad[i].gameObject.SetActive(false);
         }
     }
 
@@ -131,6 +153,7 @@ public class Builder : MonoBehaviour {
                 var block = Instantiate(CurrentBluePrint.Structure);
                 block.transform.position = new Vector3(spot.x, 0f, spot.y);
                 StationStructure.instance.Foundations[spot] = true;
+                StationStructure.instance.Spaces[spot] = true;
                 block.transform.SetParent(StationStructure.instance.transform);
             }
             
@@ -140,6 +163,10 @@ public class Builder : MonoBehaviour {
     void Build()
     {
         var shape = GetShape();
+
+        if (!CanBuildHere(shape)) return;
+        
+
         foreach (var spot in shape)
         {
             if (StationStructure.instance.Foundations.ContainsKey(spot))
@@ -147,6 +174,7 @@ public class Builder : MonoBehaviour {
                 var block = Instantiate(CurrentBluePrint.Structure);
                 block.transform.position = new Vector3(spot.x, CurrentBluePrint.Level, spot.y);
                 block.transform.SetParent(StationStructure.instance.transform);
+                StationStructure.instance.Spaces[spot] = false;
             }
 
         }
@@ -194,4 +222,17 @@ public class Builder : MonoBehaviour {
         return shape;
     }
 
+
+    bool CanBuildHere(List<Vector2Int> shape)
+    {
+        foreach (var spot in shape)
+        {
+            if (!StationStructure.instance.Foundations.ContainsKey(spot) || StationStructure.instance.Spaces[spot] == false )
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
