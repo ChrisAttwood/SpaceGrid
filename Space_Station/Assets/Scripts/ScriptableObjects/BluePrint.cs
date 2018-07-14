@@ -12,6 +12,8 @@ public class BluePrint : ScriptableObject {
     public int Level = 1;
     public bool IsFoundation;
 
+    public bool SingleGameObject;
+
     [Header("Footprint")]
     public FootPrintData FootPrintData;
    

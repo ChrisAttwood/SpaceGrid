@@ -165,19 +165,41 @@ public class Builder : MonoBehaviour {
         var shape = GetShape();
 
         if (!CanBuildHere(shape)) return;
-        
 
-        foreach (var spot in shape)
+
+        if (CurrentBluePrint.SingleGameObject)
         {
-            if (StationStructure.instance.Foundations.ContainsKey(spot))
-            {
-                var block = Instantiate(CurrentBluePrint.Structure);
-                block.transform.position = new Vector3(spot.x, CurrentBluePrint.Level, spot.y);
-                block.transform.SetParent(StationStructure.instance.transform);
-                StationStructure.instance.Spaces[spot] = false;
-            }
+            var center = ClickPlane.instance.GetGridPosition().Value;
+            var block = Instantiate(CurrentBluePrint.Structure);
+            block.transform.position = new Vector3(center.x, CurrentBluePrint.Level, center.y);
+            block.transform.SetParent(StationStructure.instance.transform);
 
+            foreach (var spot in shape)
+            {
+                if (StationStructure.instance.Foundations.ContainsKey(spot))
+                {
+                    StationStructure.instance.Spaces[spot] = false;
+                }
+
+            }
         }
+        else
+        {
+            foreach (var spot in shape)
+            {
+                if (StationStructure.instance.Foundations.ContainsKey(spot))
+                {
+                    var block = Instantiate(CurrentBluePrint.Structure);
+                    block.transform.position = new Vector3(spot.x, CurrentBluePrint.Level, spot.y);
+                    block.transform.SetParent(StationStructure.instance.transform);
+                    StationStructure.instance.Spaces[spot] = false;
+                }
+
+            }
+        }
+
+
+       
     }
 
 

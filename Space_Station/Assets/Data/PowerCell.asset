@@ -15,10 +15,11 @@ MonoBehaviour:
   BuildType: 1
   Level: 1
   IsFoundation: 0
+  SingleGameObject: 1
   FootPrintData:
     rows:
-    - row: 0000010000
-    - row: 0000010000
-    - row: 0101010000
     - row: 0000000000
+    - row: 0000000000
+    - row: 0000010000
+    - row: 0000010000
     - row: 0000000000
