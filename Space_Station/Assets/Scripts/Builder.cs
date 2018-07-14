@@ -22,6 +22,11 @@ public class Builder : MonoBehaviour {
 
     private void Start()
     {
+        CreateAndHideBluePrintBlocks();
+    }
+
+    void CreateAndHideBluePrintBlocks()
+    {
         GameObject holder = new GameObject("bluePrintDesigner");
         pbs = new GameObject[bpSize];
         for (int i = 0; i < bpSize; i++)
@@ -30,13 +35,10 @@ public class Builder : MonoBehaviour {
             pbs[i].transform.parent = holder.transform;
             pbs[i].gameObject.SetActive(false);
         }
-      
-
     }
 
-    public void SetBluePrint(BluePrint bp)
+    public void SetActiveBluePrint(BluePrint bp)
     {
-
         ClearBluePrints();
         IsDrawing = false;
         CurrentBluePrint = bp;
@@ -48,6 +50,7 @@ public class Builder : MonoBehaviour {
 
     void Update () {
 
+        //If the mouse pointer is over a UI element, do nothing and return.
         if (EventSystem.current.IsPointerOverGameObject()) return;
 
         if (Input.GetMouseButtonDown(0))
@@ -55,7 +58,6 @@ public class Builder : MonoBehaviour {
             if (CurrentBluePrint != null)
             {
                 IsDrawing = true;
-
                 StartPos = ClickPlane.instance.GetGridPosition();
             }
         }

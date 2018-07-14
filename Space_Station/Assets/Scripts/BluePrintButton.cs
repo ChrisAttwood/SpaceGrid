@@ -8,6 +8,6 @@ public class BluePrintButton : MonoBehaviour {
 
     public void Click()
     {
-        Builder.instance.SetBluePrint(BluePrint);
+        Builder.instance.SetActiveBluePrint(BluePrint);
     }
 }
