@@ -9,7 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15b3f8bb7263c3f42902965aab2b3bfb, type: 3}
-  m_Name: MetalFloor
+  m_Name: PowerCell
   m_EditorClassIdentifier: 
-  Structure: {fileID: 1172586250906570, guid: 90a5d0cdcf32de44e9a220f2721518f1, type: 2}
-  BuildType: 3
+  Structure: {fileID: 1818056121789324, guid: c1c5fdb9234d73d499179107d12d077b, type: 2}
+  BuildType: 0
+  Foundation: 0

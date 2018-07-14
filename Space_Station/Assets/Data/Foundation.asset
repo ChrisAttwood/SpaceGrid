@@ -9,7 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15b3f8bb7263c3f42902965aab2b3bfb, type: 3}
-  m_Name: Wall
+  m_Name: Foundation
   m_EditorClassIdentifier: 
-  Structure: {fileID: 1519631669100216, guid: 13dc9f9693708d444a96485671966ded, type: 2}
-  BuildType: 2
+  Structure: {fileID: 1109646688160740, guid: 7a9df03762cd1754e8fd6590e9aa3a6e, type: 2}
+  BuildType: 3
+  Level: 0
+  Foundation: 1

@@ -9,6 +9,8 @@ public class BluePrint : ScriptableObject {
     
     public BuildType BuildType;
 
-    //True is it can be walked on, false for stuff like walls.
-    public bool Space;
+    public int Level = 1;
+    public bool Foundation;
+   
+
 }

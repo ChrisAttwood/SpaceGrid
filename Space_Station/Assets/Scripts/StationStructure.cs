@@ -7,12 +7,15 @@ public class StationStructure : MonoBehaviour {
 
     public static StationStructure instance;
 
+    public Dictionary<Vector2Int, bool> Foundations;
+
     public Dictionary<Vector2Int, bool> Spaces;
 
     private void Awake()
     {
         instance = this;
         Spaces = new Dictionary<Vector2Int, bool>();
+        Foundations = new Dictionary<Vector2Int, bool>();
     }
 
 

@@ -10,7 +10,7 @@ public class Builder : MonoBehaviour {
    
     public GameObject BluePrintTile;
     GameObject[] pbs;
-    int bpSize = 100;
+    int bpSize = 1000;
     BluePrint CurrentBluePrint;
 
     Vector2Int? StartPos;
@@ -67,7 +67,17 @@ public class Builder : MonoBehaviour {
         {
             if (CurrentBluePrint != null)
             {
-                Build();
+                if (CurrentBluePrint.Foundation)
+                {
+                    BuildFoundation();
+                }
+                else
+                {
+                    Build();
+                }
+               
+               
+               
                 IsDrawing = false;
                 ClearBluePrints();
 
@@ -97,7 +107,7 @@ public class Builder : MonoBehaviour {
         for (int j = 0; j < Shape.Count; j++)
         {
             pbs[j].gameObject.SetActive(true);
-            pbs[j].transform.position = new Vector3(Shape[j].x,0f , Shape[j].y);
+            pbs[j].transform.position = new Vector3(Shape[j].x, CurrentBluePrint.Level, Shape[j].y);
            
         }
 
@@ -113,15 +123,35 @@ public class Builder : MonoBehaviour {
 
 
 
-    void Build()
+    void BuildFoundation()
     {
-
         var shape = GetShape();
-
         foreach(var spot in shape)
         {
-            var block = Instantiate(CurrentBluePrint.Structure);
-            block.transform.position = new Vector3(spot.x,0f,spot.y);
+            if (!StationStructure.instance.Foundations.ContainsKey(spot))
+            {
+                var block = Instantiate(CurrentBluePrint.Structure);
+                block.transform.position = new Vector3(spot.x, 0f, spot.y);
+                StationStructure.instance.Foundations[spot] = true;
+                block.transform.SetParent(StationStructure.instance.transform);
+            }
+            
+        }
+    }
+
+    void Build()
+    {
+        var shape = GetShape();
+        foreach (var spot in shape)
+        {
+            if (StationStructure.instance.Foundations.ContainsKey(spot))
+            {
+                var block = Instantiate(CurrentBluePrint.Structure);
+                block.transform.position = new Vector3(spot.x, CurrentBluePrint.Level, spot.y);
+                
+                block.transform.SetParent(StationStructure.instance.transform);
+            }
+
         }
     }
 
