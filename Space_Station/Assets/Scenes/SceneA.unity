@@ -184,6 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 221813724}
   - component: {fileID: 221813723}
+  - component: {fileID: 221813725}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -234,13 +235,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 221813722}
-  m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
+  m_LocalRotation: {x: 0.08052145, y: 0.3812272, z: -0.033353075, w: 0.9203639}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 45, z: 0}
+--- !u!114 &221813725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 221813722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ae743fc4aff80743b612d6c3b7aac06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  satelliteOf: {fileID: 1071106977}
+  orbitSpeed: 10
 --- !u!1001 &363700187
 Prefab:
   m_ObjectHideFlags: 0
@@ -387,6 +401,11 @@ Prefab:
     - target: {fileID: 4556194005281544, guid: c6730d06a444a874f80fbb0575b330f9, type: 2}
       propertyPath: m_LocalScale.z
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 23300962945464478, guid: c6730d06a444a874f80fbb0575b330f9,
+        type: 2}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6730d06a444a874f80fbb0575b330f9, type: 2}
@@ -674,7 +693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PanHoriz: 50
   PanVert: 50
-  Speed: 1
+  Speed: 0.1
   Angle: 1
 --- !u!114 &1955912966
 MonoBehaviour:

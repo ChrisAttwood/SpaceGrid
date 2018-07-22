@@ -42,7 +42,13 @@ public class AM_MapGenerator : MonoBehaviour {
             goAsteroid.transform.SetParent(this.transform);
             goAsteroid.transform.localPosition = new Vector3(newX, newY, newZ);
             goAsteroid.transform.localRotation = Random.rotation;
-
+            if (planet != null)
+            {
+                var orbit = goAsteroid.AddComponent<Orbit>();
+                orbit.satelliteOf = planet;
+                orbit.orbitSpeed = Random.Range(0.1f, 1f);
+            }
+           
 
             MixAsteroidUp(goAsteroid);
            
