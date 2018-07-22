@@ -38,8 +38,14 @@ public class AM_MapGenerator : MonoBehaviour {
             float newZ = spawnOrigin.z + randomDistance * Mathf.Sin(randomDirection);
             // Then add some depth and spawn the asteroid
             float newY = Random.Range(-depth / 2f, depth / 2f);
-            GameObject goAsteroid = GameObject.Instantiate(Asteroid, new Vector3(newX, newY, newZ), Random.rotation);
+            GameObject goAsteroid = GameObject.Instantiate(Asteroid);
+            goAsteroid.transform.SetParent(this.transform);
+            goAsteroid.transform.localPosition = new Vector3(newX, newY, newZ);
+            goAsteroid.transform.localRotation = Random.rotation;
+
+
             MixAsteroidUp(goAsteroid);
+           
         }
     }
 

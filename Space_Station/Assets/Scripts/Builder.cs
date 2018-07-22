@@ -12,7 +12,7 @@ public class Builder : MonoBehaviour {
     public GameObject BadBluePrint;
     GameObject[] good;
     GameObject[] bad;
-    int bpSize = 1000;
+    int bpSize = 2000;
     BluePrint CurrentBluePrint;
 
     Vector2Int? StartPos;
